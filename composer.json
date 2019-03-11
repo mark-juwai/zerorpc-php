@@ -8,7 +8,7 @@
       "role": "Developer"
     }
   ],
-  "version": "1.2.5",
+  "version": "1.2.6",
   "license": "MIT",
   "require": {
     "php": ">=5.4.0",
@@ -18,5 +18,5 @@
   "autoload": {
     "classmap": ["src/"]
   },
-  "minimum-stability": "dev"
+  "minimum-stability": "stable"
 }
