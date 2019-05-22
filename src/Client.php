@@ -81,6 +81,13 @@ class Client
         $this->socket->connect($endpoint);
     }
 
+    public function reconnect()
+    {
+        $endpoint = $this->context->hookResolveEndpoint($this->_endpoint, $this->_version);
+        $this->socket->disconnect($endpoint);
+        $this->socket->connect($endpoint);
+    }
+
     public function setTimeout($timeout)
     {
         $this->timeout = $timeout;
@@ -107,6 +114,8 @@ class Client
             $this->context->hookAfterResponse($event, $this);
             return $event->getContent(); 
         } else {
+            // Reconnect the socket when timeout to avoid messages been messed up.
+            $this->reconnect();
             throw new TimeoutException('Timout after ' . $this->timeout .' ms');
         }
     }
